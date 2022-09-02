@@ -31,13 +31,16 @@ steps:
 
 - task: Docker@2
   inputs:
+    repository: 'applecontainerreg.azurecr.io'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
+    containerRegistry: 
     
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(Pipeline.Workspace)'
     artifact: 'AppleArtifacts'
     publishLocation: 'pipeline'
+
 
 
