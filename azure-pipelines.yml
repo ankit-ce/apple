@@ -17,6 +17,7 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
 
+
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
@@ -28,8 +29,15 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: Docker@2
+  inputs:
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(Pipeline.Workspace)'
     artifact: 'AppleArtifacts'
     publishLocation: 'pipeline'
+
+
